@@ -36,6 +36,10 @@ namespace Crud_sequenziale22F
             cancellazione_logica.Visible = false;
             annulla.Visible = false;
             titolo_cancellazione.Visible = false;
+
+            // sfondo
+
+            Image sfondo = Image.FromFile("./prodotti-online-grocery-3.jpg");
         }
 
 
@@ -695,6 +699,7 @@ namespace Crud_sequenziale22F
             visualizza_file.Visible = false;
             recupera.Visible = false;
             trova_prodotto.Visible=false;
+            titolo.Visible = false;
             //trova_indice.Visible = false;
 
             // rendo visibile le due scelte di cancellazione
@@ -717,6 +722,7 @@ namespace Crud_sequenziale22F
             visualizza_file.Visible = true;
             recupera.Visible = true;
             trova_prodotto.Visible = true;
+            titolo.Visible = true;
             //trova_indice.Visible = true;
 
             // rendo visibile le due scelte di cancellazione
@@ -801,6 +807,7 @@ namespace Crud_sequenziale22F
             visualizza_file.Visible = true;
             recupera.Visible = true;
             trova_prodotto.Visible=true;
+            titolo.Visible = true;
 
             // rendo invisibile le due scelte di cancellazione
 
@@ -1025,6 +1032,7 @@ namespace Crud_sequenziale22F
             visualizza_file.Visible = true;
             recupera.Visible = true;
             trova_prodotto.Visible=true;
+            titolo.Visible = true;
             //trova_indice.Visible = true;
 
             // rendo visibile le due scelte di cancellazione
@@ -1117,6 +1125,7 @@ namespace Crud_sequenziale22F
 
             }
         }
+
     }
 }
     
