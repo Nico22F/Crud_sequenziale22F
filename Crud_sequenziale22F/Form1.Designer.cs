@@ -90,7 +90,7 @@
             // 
             // elimina
             // 
-            this.elimina.Location = new System.Drawing.Point(246, 242);
+            this.elimina.Location = new System.Drawing.Point(245, 242);
             this.elimina.Margin = new System.Windows.Forms.Padding(2);
             this.elimina.Name = "elimina";
             this.elimina.Size = new System.Drawing.Size(170, 72);
@@ -102,10 +102,12 @@
             // cancellazione_fisica
             // 
             this.cancellazione_fisica.AutoSize = true;
-            this.cancellazione_fisica.Location = new System.Drawing.Point(182, 135);
+            this.cancellazione_fisica.Font = new System.Drawing.Font("NSimSun", 14.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cancellazione_fisica.ForeColor = System.Drawing.Color.DarkSlateBlue;
+            this.cancellazione_fisica.Location = new System.Drawing.Point(119, 129);
             this.cancellazione_fisica.Margin = new System.Windows.Forms.Padding(2);
             this.cancellazione_fisica.Name = "cancellazione_fisica";
-            this.cancellazione_fisica.Size = new System.Drawing.Size(150, 17);
+            this.cancellazione_fisica.Size = new System.Drawing.Size(248, 23);
             this.cancellazione_fisica.TabIndex = 5;
             this.cancellazione_fisica.Text = "CANCELLAZIONE FISICA";
             this.cancellazione_fisica.UseVisualStyleBackColor = true;
@@ -114,10 +116,12 @@
             // cancellazione_logica
             // 
             this.cancellazione_logica.AutoSize = true;
-            this.cancellazione_logica.Location = new System.Drawing.Point(184, 176);
+            this.cancellazione_logica.Font = new System.Drawing.Font("NSimSun", 14.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cancellazione_logica.ForeColor = System.Drawing.Color.DarkSlateBlue;
+            this.cancellazione_logica.Location = new System.Drawing.Point(119, 221);
             this.cancellazione_logica.Margin = new System.Windows.Forms.Padding(2);
             this.cancellazione_logica.Name = "cancellazione_logica";
-            this.cancellazione_logica.Size = new System.Drawing.Size(156, 17);
+            this.cancellazione_logica.Size = new System.Drawing.Size(248, 23);
             this.cancellazione_logica.TabIndex = 6;
             this.cancellazione_logica.Text = "CANCELLAZIONE LOGICA";
             this.cancellazione_logica.UseVisualStyleBackColor = true;

@@ -303,41 +303,59 @@ namespace Crud_sequenziale22F
                 }
                 else
                 {
-                    // controlla che non sia presente un prodotto identico (in caso affermativo allora aumenta la quantità)
-                    bool quantita = false;
-                    int posizione = 0; // se il prodotto è già stato aggiunto in precedenza, segna la posizione
+                   // controllo che la parola inserita non superi i 32 byte 
 
-                    quantita = ControlloProdotto(ref quantita, nome_temporaneo, ref posizione);
-
-                    if (quantita == true) // prodotto già presente
+                    if(nome_temporaneo.Length > 29)
                     {
-                        AumentaQuantita(posizione - 1);
-                        MessageBox.Show("il prodotto da lei inserito è già stato inserito. Quantità aumentata");
+                        MessageBox.Show("Errore nell'aggiunta del prodotto. Il nome da lei scelto è troppo lungo", "ERRORE", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
                     }
-                    else // prodotto nuovo
+                    else // nessun errore
                     {
+                        // controlla che non sia presente un prodotto identico (in caso affermativo allora aumenta la quantità)
+                        bool quantita = false;
+                        int posizione = 0; // se il prodotto è già stato aggiunto in precedenza, segna la posizione
 
-                        // input prezzo
+                        quantita = ControlloProdotto(ref quantita, nome_temporaneo, ref posizione);
 
-                        titolo_input = "Aggiungi Prodotto - Prezzo"; esempio = "prezzo prodotto"; frase = "Inserisci il prezzo del prodotto che vuoi aggiungere";
-                        input_aggiungiprodotto = Interaction.InputBox(frase, titolo_input, esempio);
-                        float prova_numero = 0; // se la conversione risultasse corretta (questa sotto) la stringa convertita in float finirebbe qua
-
-                        // tryparse serve per vedere se la conversione funziona
-                        if (!float.TryParse((string)input_aggiungiprodotto, out prova_numero))
+                        if (quantita == true) // prodotto già presente
                         {
-                            MessageBox.Show("Errore nell'aggiunta del prodotto", "ERRORE", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            p[dim].nome = null;
+                            AumentaQuantita(posizione - 1);
+                            MessageBox.Show("il prodotto da lei inserito è già stato inserito. Quantità aumentata");
                         }
-                        else
+                        else // prodotto nuovo
                         {
-                            int quantita_prodotto = 1;
-                            AggiungiProdottoFile((string)input_aggiungiprodotto, nome_temporaneo, quantita_prodotto, dim);
-                            OrdineAlfabetico();
 
+                            // input prezzo
+
+                            titolo_input = "Aggiungi Prodotto - Prezzo"; esempio = "prezzo prodotto"; frase = "Inserisci il prezzo del prodotto che vuoi aggiungere";
+                            input_aggiungiprodotto = Interaction.InputBox(frase, titolo_input, esempio);
+                            float prova_numero = 0; // se la conversione risultasse corretta (questa sotto) la stringa convertita in float finirebbe qua
+
+                            // tryparse serve per vedere se la conversione funziona
+                            if (!float.TryParse((string)input_aggiungiprodotto, out prova_numero))
+                            {
+                                MessageBox.Show("Errore nell'aggiunta del prodotto", "ERRORE", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                p[dim].nome = null;
+                            }
+                            else
+                            {
+                                string numero_str = prova_numero.ToString();
+                                if (numero_str.Length > 29) // controllo lunghezza prezzo
+                                {
+                                    MessageBox.Show("Errore nell'aggiunta del prodotto. Il prezzo da lei scelto è troppo lungo", "ERRORE", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    p[dim].nome = null;
+                                }
+                                else
+                                {
+                                    int quantita_prodotto = 1;
+                                    AggiungiProdottoFile((string)input_aggiungiprodotto, nome_temporaneo, quantita_prodotto, dim);
+                                    OrdineAlfabetico();
+
+                                }
+                            }
                         }
                     }
-
                 }
             }
         }
@@ -607,48 +625,74 @@ namespace Crud_sequenziale22F
                 }
                 else // se non è stato eliminato
                 {
-                    // input prezzo
-
-                    titolo_input = "Modifica Prodotto - Prezzo"; frase = "Inserisci il prezzo del prodotto che vuoi modificare";
-                    input_aggiungiprodotto = Interaction.InputBox(frase, titolo_input, PrezzoProdotto);
-                    float prova_numero = 0; // se la conversione risultasse corretta (questa sotto) la stringa convertita in float finirebbe qua
-
-                    // tryparse serve per vedere se la conversione funziona
-                    if (!float.TryParse((string)input_aggiungiprodotto, out prova_numero))
+                    if(nome_temporaneo.Length > 29) // controllo lunghezza nome prodotto
                     {
-                        MessageBox.Show("Errore nell'aggiunta del prodotto", "ERRORE", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show("Errore nella modifica del prodotto. NOME TROPPO LUNGO", "ERRORE", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
                     }
-                    else // modifica quantità
+                    else
                     {
-                        titolo_input = "Modifica Prodotto - Quantità"; frase = "Inserisci la quantità del prodotto che vuoi modificare";
+                        // input prezzo
+
+                        titolo_input = "Modifica Prodotto - Prezzo"; frase = "Inserisci il prezzo del prodotto che vuoi modificare";
                         input_aggiungiprodotto = Interaction.InputBox(frase, titolo_input, PrezzoProdotto);
-                        int prova_quantita = 0; // se la conversione risultasse corretta (questa sotto) la stringa convertita in float finirebbe qua
+                        float prova_numero = 0; // se la conversione risultasse corretta (questa sotto) la stringa convertita in float finirebbe qua
 
                         // tryparse serve per vedere se la conversione funziona
-                        if (!int.TryParse((string)input_aggiungiprodotto, out prova_quantita))
+                        if (!float.TryParse((string)input_aggiungiprodotto, out prova_numero))
                         {
-                            MessageBox.Show("Errore nella modifica del prodotto", "ERRORE", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            MessageBox.Show("Errore nell'aggiunta del prodotto", "ERRORE", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
                         }
-                        else // tutto corretto
+                        else // modifica quantità
                         {
-                            p[posizione-1].nome = nome_temporaneo;
+                            string num_str = prova_numero.ToString();
+                            if(num_str.Length > 29)
+                            {
+                                MessageBox.Show("Errore nella modifica del prodotto. PREZZO TROPPO LUNGO", "ERRORE", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
-                            // scrittura
+                            }
+                            else
+                            {
+                                titolo_input = "Modifica Prodotto - Quantità"; frase = "Inserisci la quantità del prodotto che vuoi modificare";
+                                input_aggiungiprodotto = Interaction.InputBox(frase, titolo_input, PrezzoProdotto);
+                                int prova_quantita = 0; // se la conversione risultasse corretta (questa sotto) la stringa convertita in float finirebbe qua
 
-                            BinaryWriter bw = new BinaryWriter(file);
-                            bw.BaseStream.Seek((posizione-1) * size, 0);
+                                // tryparse serve per vedere se la conversione funziona
+                                if (!int.TryParse((string)input_aggiungiprodotto, out prova_quantita))
+                                {
+                                    MessageBox.Show("Errore nella modifica del prodotto", "ERRORE", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
-                            string riga = nome_temporaneo.PadRight(30) + Convert.ToString(prova_numero).PadRight(30) + (prova_quantita.ToString()).PadRight(4);
-                            byte[] strInByte = Encoding.Default.GetBytes(riga);
-                            bw.Write(strInByte);
+                                }
+                                else // tutto "corretto" 
+                                {
+                                   num_str = prova_quantita.ToString();
+                                    if (num_str.Length > 29) // controllo lunghezza quantità
+                                    {
+                                        MessageBox.Show("Errore nella modifica del prodotto. PREZZO TROPPO ELEVATA", "ERRORE", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
-                            // riordino alfabeticamente 
-                            OrdineAlfabetico();
-                            bw.Close();
-                            file.Close();
-                            br.Close();
+                                    }
+                                    else
+                                    {
+                                        p[posizione - 1].nome = nome_temporaneo;
+
+                                        // scrittura
+
+                                        BinaryWriter bw = new BinaryWriter(file);
+                                        bw.BaseStream.Seek((posizione - 1) * size, 0);
+
+                                        string riga = nome_temporaneo.PadRight(30) + Convert.ToString(prova_numero).PadRight(30) + (prova_quantita.ToString()).PadRight(4);
+                                        byte[] strInByte = Encoding.Default.GetBytes(riga);
+                                        bw.Write(strInByte);
+
+                                        // riordino alfabeticamente 
+                                        OrdineAlfabetico();
+                                        bw.Close();
+                                        file.Close();
+                                        br.Close();
+                                    }
+                                }
+                            }
                         }
                     }
                 }
@@ -977,32 +1021,11 @@ namespace Crud_sequenziale22F
                 byte[] bit = br.ReadBytes(30);
                 bit = br.ReadBytes(30);
                 string PrezzoProdotto = Encoding.ASCII.GetString(bit, 1, bit.Length-1).Trim();
-                /*
-                string frase = "";
-                for (int i = 0; i < PrezzoProdotto.Length; i++)
-                {
-                    if (PrezzoProdotto[i]  !=  '§')
-                    {
-                        frase += PrezzoProdotto[i];
-                    }
-                }
-                PrezzoProdotto = frase;
-                */
-
+                
                 // quantità prodotto
 
                 bit = br.ReadBytes(4);
                 string quantita = Encoding.ASCII.GetString(bit, 1, bit.Length-1).Trim();
-
-               /* for (int i = 0; i < quantita.Length; i++)
-                {
-                    if (quantita[i] != '§')
-                    {
-                        frase += quantita[i];
-                    }
-                }
-                quantita = frase;
-               */
 
                 // scrittura
 
@@ -1049,12 +1072,12 @@ namespace Crud_sequenziale22F
         {
             // input prodotto da eliminare
 
-            string titolo_input = "Eliminazione Prodotto - NOME", esempio = "nome prodotto", frase = "Inserisci il nome del prodotto che vuoi eliminare";
+            string titolo_input = "Ricerca Prodotto Prodotto - NOME", esempio = "nome prodotto", frase = "Inserisci il nome del prodotto che vuoi eliminare";
             object input_eliminaprodotto = Interaction.InputBox(frase, titolo_input, esempio);
 
             if ((string)input_eliminaprodotto == "") // user esce o lascia il campo vuoto
             {
-                MessageBox.Show("Errore nell'eliminazione del prodotto", "ERRORE", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Errore nella ricerca del prodotto", "ERRORE", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
             }
             else // se inserisce input "corretto"
@@ -1062,7 +1085,7 @@ namespace Crud_sequenziale22F
                 string nome_temporaneo = (string)input_eliminaprodotto;
                 int posizione = -1; // se rimane -1, allora l'utente ha sbagliato a scrivere
 
-                if (nome_temporaneo[0] == '§' || nome_temporaneo == "@" || nome_temporaneo[0] == '@'|| nome_temporaneo =="") // non si può modificare un prodotto eliminato logicamente
+                if (nome_temporaneo == "" || nome_temporaneo[0] == '§' || nome_temporaneo == "@" || nome_temporaneo[0] == '@') // non si può modificare un prodotto eliminato logicamente
                 {
                     MessageBox.Show("Prodotto errato", "ERRORE", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
