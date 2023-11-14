@@ -73,7 +73,7 @@
             this.resetta_file.Name = "resetta_file";
             this.resetta_file.Size = new System.Drawing.Size(170, 72);
             this.resetta_file.TabIndex = 2;
-            this.resetta_file.Text = "RESETTA FILE";
+            this.resetta_file.Text = "ESCI E RESETTA FILE";
             this.resetta_file.UseVisualStyleBackColor = true;
             this.resetta_file.Click += new System.EventHandler(this.resetta_file_Click);
             // 

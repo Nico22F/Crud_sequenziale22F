@@ -427,7 +427,7 @@ namespace Crud_sequenziale22F
             nuova_quantita++;
 
             // riscrivo la riga
-            bw.BaseStream.Seek((posizione) * size, 0);
+            bw.BaseStream.Seek((p[posizione].posizione) * size, 0);
             byte[] strInByte;
             string riga = nome.PadRight(30) + prezzo.PadRight(30) + (nuova_quantita.ToString()).PadRight(4);
             strInByte = Encoding.Default.GetBytes(riga);
@@ -544,15 +544,17 @@ namespace Crud_sequenziale22F
         // resetta il file e la struct
         private void resetta_file_Click(object sender, EventArgs e)
         {
-            // prima di resettare chiede una conferma dall'utente
+            // prima di resettare chiede una conferma dall'utente e chiude il programma
 
-            DialogResult ConfermaReset = MessageBox.Show("Vuoi resettare l'intero file?", "RESET FILE", MessageBoxButtons.YesNo);
+            DialogResult ConfermaReset = MessageBox.Show("Vuoi resettare l'intero file? (il programma verrà chiuso)", "RESET FILE", MessageBoxButtons.YesNo);
 
             if (ConfermaReset == DialogResult.Yes) // se l'utente clicca si
             {
                 ResetFile(); // resetta file
 
                 ResettaStruct(); //resetta struct
+
+                this.Close(); // chiudo il file
             }
         }
 
@@ -809,7 +811,6 @@ namespace Crud_sequenziale22F
                     else
                     {
                         CancellazioneFisica(posizione); // cancello fisicamente
-                        OrdineAlfabetico(); // riaggiorno la struct
                     }
                 }
             }
@@ -892,7 +893,6 @@ namespace Crud_sequenziale22F
                     else // nessun errore
                     {
                         CancellazioneLogica(posizione);
-                        OrdineAlfabetico();
                     }
                 }
 
